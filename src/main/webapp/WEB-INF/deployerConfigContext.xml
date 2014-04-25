@@ -128,10 +128,36 @@
 					| where the username equals the password.  You will need to replace this with an AuthenticationHandler that implements your
 					| local authentication strategy.  You might accomplish this by coding a new such handler and declaring
 					| edu.someschool.its.cas.MySpecialHandler here, or you might use one of the handlers provided in the adaptors modules.
-					+-->
+					+
 				<bean 
 					class="org.jasig.cas.authentication.handler.support.SimpleTestUsernamePasswordAuthenticationHandler" />
-			</list>
+			-->
+                        
+                        
+                        
+                        
+                      
+                                <bean class="org.jasig.cas.adaptors.jdbc.SearchModeSearchDatabaseAuthenticationHandler">
+                                        <property name="tableUsers">
+                                            <value>users</value>
+                                        </property>
+                                        <property name="fieldUser">
+                                            <value>username</value>
+                                        </property>
+                                        <property name="fieldPassword">
+                                            <value>password</value>
+                                        </property>
+                                        <property name="dataSource" ref="dataSource" />
+                                        <property name="passwordEncoder">
+                                             <bean class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder" p:characterEncoding="UTF-8" >
+                                                <constructor-arg index="0" value="MD5" />
+                                             </bean> 
+                                        </property>
+                                        
+                                    </bean>
+                        
+                        
+                                </list>
 		</property>
 	</bean>
 
@@ -209,7 +235,7 @@
         p:username="test"
         p:password="test" />
         
-          
+        
         
 	<!-- 
 	Sample, in-memory data store for the ServiceRegistry. A real implementation
@@ -242,29 +268,29 @@
         <property name="evaluationOrder" value="0" />
     </bean>
  
-</list>
-</property>
-</bean>
-   -->
-<bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
+ </list>
+ </property>
+ </bean>
+    -->
+    <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
   
-<bean id="healthCheckMonitor" class="org.jasig.cas.monitor.HealthCheckMonitor">
-    <property name="monitors">
-        <list>
-            <bean class="org.jasig.cas.monitor.MemoryMonitor"
-                  p:freeMemoryWarnThreshold="10" />
-            <!--
-              NOTE
-              The following ticket registries support SessionMonitor:
-                * DefaultTicketRegistry
-                * JpaTicketRegistry
-              Remove this monitor if you use an unsupported registry.
-            -->
-            <bean class="org.jasig.cas.monitor.SessionMonitor"
-                  p:ticketRegistry-ref="ticketRegistry"
-                  p:serviceTicketCountWarnThreshold="5000"
-                  p:sessionCountWarnThreshold="100000" />
-        </list>
-    </property>
-</bean>
+    <bean id="healthCheckMonitor" class="org.jasig.cas.monitor.HealthCheckMonitor">
+        <property name="monitors">
+            <list>
+                <bean class="org.jasig.cas.monitor.MemoryMonitor"
+                      p:freeMemoryWarnThreshold="10" />
+                <!--
+                  NOTE
+                  The following ticket registries support SessionMonitor:
+                    * DefaultTicketRegistry
+                    * JpaTicketRegistry
+                  Remove this monitor if you use an unsupported registry.
+                -->
+                <bean class="org.jasig.cas.monitor.SessionMonitor"
+                      p:ticketRegistry-ref="ticketRegistry"
+                      p:serviceTicketCountWarnThreshold="5000"
+                      p:sessionCountWarnThreshold="100000" />
+            </list>
+        </property>
+    </bean>
 </beans>
