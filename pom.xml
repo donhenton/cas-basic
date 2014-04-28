@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dhenton9000</groupId>
-    <artifactId>local-cas</artifactId>
+    <artifactId>cas-basic</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <properties>
@@ -217,4 +217,5 @@ http://repo1.maven.org/maven2/org/jasig/cas/cas-server/3.5.1/cas-server-3.5.1.po
             <url>http://oss.sonatype.org/content/repositories/releases/ </url>
         </repository>
     </repositories>
+    <name>cas-basic</name>
 </project>
