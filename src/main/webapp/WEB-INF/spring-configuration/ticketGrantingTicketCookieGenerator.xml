@@ -28,7 +28,7 @@
 	</description>
 	<bean id="ticketGrantingTicketCookieGenerator" class="org.jasig.cas.web.support.CookieRetrievingCookieGenerator"
 		p:cookieSecure="false"
-		p:cookieMaxAge="-1"
+		p:cookieMaxAge="604800"
 		p:cookieName="CASTGC"
 		p:cookiePath="/cas" />
 </beans>
